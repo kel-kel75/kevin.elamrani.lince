@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://kevin-elamrani-lince.com/sitemap.xml

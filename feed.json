@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "kevin.elamrani.lince",
+    "description": "",
+    "home_page_url": "https://kevin-elamrani-lince.com",
+    "feed_url": "https://kevin-elamrani-lince.com/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "kel"
+    },
+    "items": [
+    ]
+}
