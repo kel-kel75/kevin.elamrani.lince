@@ -109,7 +109,7 @@
       background: var(--term-green);
       vertical-align: bottom;
       animation: blink 0.8s infinite;
-      margin-left: 2px;
+      margin-left: 4px;
     }
 
     @keyframes blink {
@@ -152,6 +152,90 @@
       margin-bottom: 6px;
       letter-spacing: 1px;
     }
+
+    /* DÉSYNCHRONISATION ET EFFET WAVE SUR LES 76 CURSEURS */
+    /* On applique une fonction 'calc' dynamique sur les 76 cartes */
+    .video-card .cursor {
+      animation: blink 1.2s infinite ease-in-out;
+    }
+
+    /* Décalage temporel progressif basé sur l'index de la carte */
+    .video-card:nth-child(1) .cursor { animation-delay: 0.05s; }
+    .video-card:nth-child(2) .cursor { animation-delay: 0.10s; }
+    .video-card:nth-child(3) .cursor { animation-delay: 0.15s; }
+    .video-card:nth-child(4) .cursor { animation-delay: 0.20s; }
+    .video-card:nth-child(5) .cursor { animation-delay: 0.25s; }
+    .video-card:nth-child(6) .cursor { animation-delay: 0.30s; }
+    .video-card:nth-child(7) .cursor { animation-delay: 0.35s; }
+    .video-card:nth-child(8) .cursor { animation-delay: 0.40s; }
+    .video-card:nth-child(9) .cursor { animation-delay: 0.45s; }
+    .video-card:nth-child(10) .cursor { animation-delay: 0.50s; }
+    .video-card:nth-child(11) .cursor { animation-delay: 0.55s; }
+    .video-card:nth-child(12) .cursor { animation-delay: 0.60s; }
+    .video-card:nth-child(13) .cursor { animation-delay: 0.65s; }
+    .video-card:nth-child(14) .cursor { animation-delay: 0.70s; }
+    .video-card:nth-child(15) .cursor { animation-delay: 0.75s; }
+    .video-card:nth-child(16) .cursor { animation-delay: 0.80s; }
+    .video-card:nth-child(17) .cursor { animation-delay: 0.85s; }
+    .video-card:nth-child(18) .cursor { animation-delay: 0.90s; }
+    .video-card:nth-child(19) .cursor { animation-delay: 0.95s; }
+    .video-card:nth-child(20) .cursor { animation-delay: 1.00s; }
+    .video-card:nth-child(21) .cursor { animation-delay: 0.05s; }
+    .video-card:nth-child(22) .cursor { animation-delay: 0.10s; }
+    .video-card:nth-child(23) .cursor { animation-delay: 0.15s; }
+    .video-card:nth-child(24) .cursor { animation-delay: 0.20s; }
+    .video-card:nth-child(25) .cursor { animation-delay: 0.25s; }
+    .video-card:nth-child(26) .cursor { animation-delay: 0.30s; }
+    .video-card:nth-child(27) .cursor { animation-delay: 0.35s; }
+    .video-card:nth-child(28) .cursor { animation-delay: 0.40s; }
+    .video-card:nth-child(29) .cursor { animation-delay: 0.45s; }
+    .video-card:nth-child(30) .cursor { animation-delay: 0.50s; }
+    .video-card:nth-child(31) .cursor { animation-delay: 0.55s; }
+    .video-card:nth-child(32) .cursor { animation-delay: 0.60s; }
+    .video-card:nth-child(33) .cursor { animation-delay: 0.65s; }
+    .video-card:nth-child(34) .cursor { animation-delay: 0.70s; }
+    .video-card:nth-child(35) .cursor { animation-delay: 0.75s; }
+    .video-card:nth-child(36) .cursor { animation-delay: 0.80s; }
+    .video-card:nth-child(37) .cursor { animation-delay: 0.85s; }
+    .video-card:nth-child(38) .cursor { animation-delay: 0.90s; }
+    .video-card:nth-child(39) .cursor { animation-delay: 0.95s; }
+    .video-card:nth-child(40) .cursor { animation-delay: 1.00s; }
+    .video-card:nth-child(41) .cursor { animation-delay: 0.05s; }
+    .video-card:nth-child(42) .cursor { animation-delay: 0.10s; }
+    .video-card:nth-child(43) .cursor { animation-delay: 0.15s; }
+    .video-card:nth-child(44) .cursor { animation-delay: 0.20s; }
+    .video-card:nth-child(45) .cursor { animation-delay: 0.25s; }
+    .video-card:nth-child(46) .cursor { animation-delay: 0.30s; }
+    .video-card:nth-child(47) .cursor { animation-delay: 0.35s; }
+    .video-card:nth-child(48) .cursor { animation-delay: 0.40s; }
+    .video-card:nth-child(49) .cursor { animation-delay: 0.45s; }
+    .video-card:nth-child(50) .cursor { animation-delay: 0.50s; }
+    .video-card:nth-child(51) .cursor { animation-delay: 0.55s; }
+    .video-card:nth-child(52) .cursor { animation-delay: 0.60s; }
+    .video-card:nth-child(53) .cursor { animation-delay: 0.65s; }
+    .video-card:nth-child(54) .cursor { animation-delay: 0.70s; }
+    .video-card:nth-child(55) .cursor { animation-delay: 0.75s; }
+    .video-card:nth-child(56) .cursor { animation-delay: 0.80s; }
+    .video-card:nth-child(57) .cursor { animation-delay: 0.85s; }
+    .video-card:nth-child(58) .cursor { animation-delay: 0.90s; }
+    .video-card:nth-child(59) .cursor { animation-delay: 0.95s; }
+    .video-card:nth-child(60) .cursor { animation-delay: 1.00s; }
+    .video-card:nth-child(61) .cursor { animation-delay: 0.05s; }
+    .video-card:nth-child(62) .cursor { animation-delay: 0.10s; }
+    .video-card:nth-child(63) .cursor { animation-delay: 0.15s; }
+    .video-card:nth-child(64) .cursor { animation-delay: 0.20s; }
+    .video-card:nth-child(65) .cursor { animation-delay: 0.25s; }
+    .video-card:nth-child(66) .cursor { animation-delay: 0.30s; }
+    .video-card:nth-child(67) .cursor { animation-delay: 0.35s; }
+    .video-card:nth-child(68) .cursor { animation-delay: 0.40s; }
+    .video-card:nth-child(69) .cursor { animation-delay: 0.45s; }
+    .video-card:nth-child(70) .cursor { animation-delay: 0.50s; }
+    .video-card:nth-child(71) .cursor { animation-delay: 0.55s; }
+    .video-card:nth-child(72) .cursor { animation-delay: 0.60s; }
+    .video-card:nth-child(73) .cursor { animation-delay: 0.65s; }
+    .video-card:nth-child(74) .cursor { animation-delay: 0.70s; }
+    .video-card:nth-child(75) .cursor { animation-delay: 0.75s; }
+    .video-card:nth-child(76) .cursor { animation-delay: 0.80s; }
 
     /* LECTEUR IFRAME */
     .video-card iframe {
