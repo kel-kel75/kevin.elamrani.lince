@@ -74,7 +74,7 @@
       cursor: text;
     }
 
-    /* CURSEUR CLASSIQUE POUR LE SCRIPT DE FRAPPE DU HEADER */
+    /* CURSEUR TERMINAL CLASSIQUE */
     .cursor {
       display: inline-block;
       width: 10px;
@@ -83,6 +83,17 @@
       box-shadow: 0 0 8px var(--term-green);
       vertical-align: bottom;
       margin-left: 4px;
+    }
+
+    /* ANIMATION DE CLIGNOTEMENT REQUIS SUR READY */
+    .cursor.blink {
+      animation: blink-cursor 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink-cursor {
+      to {
+        visibility: hidden;
+      }
     }
 
     /* GRILLE BRUTALE MATRIX */
@@ -546,7 +557,7 @@
       </div>
 
       <div class="video-card" data-id="[ stream_73 // sxlpbeqkd98 ]">
-        <div class="card-id">[ stream_73 // sxlpbeqkd98 ]<span class="cursor"></span></div>
+        <div class="card-id">[ stream_73 // sxlpbeqkd98 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/sxLPbEqkD98?si=uQtzBZMH7r7tsPgX" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
@@ -573,9 +584,7 @@
     function randomizeScanners() {
       const scanners = document.querySelectorAll('.scanner-bar');
       scanners.forEach(bar => {
-        // Durée de va-et-vient aléatoire entre 1.8s et 3.8s
         const duration = (Math.random() * 2 + 1.8).toFixed(2);
-        // Décalage temporel aléatoire jusqu'à 3s
         const delay = (Math.random() * 3).toFixed(2);
         
         bar.style.animationDuration = `${duration}s`;
@@ -607,7 +616,6 @@
     window.addEventListener('click', initAudio, { once: true });
     window.addEventListener('keydown', initAudio, { once: true });
 
-    // 1. Son de touche de clavier
     function playKeyClick() {
       if (!audioCtx) return;
       const osc = audioCtx.createOscillator();
@@ -627,7 +635,6 @@
       osc.stop(audioCtx.currentTime + 0.04);
     }
 
-    // 2. Bip type ordinateur Alien (MU-TH-UR 6000)
     function playMotherBeep() {
       if (!audioCtx) return;
       const osc = audioCtx.createOscillator();
@@ -649,7 +656,6 @@
       osc.stop(audioCtx.currentTime + 0.06);
     }
 
-    // 3. Son final Sci-Fi
     function playReadyChime() {
       if (!audioCtx) return;
       const osc = audioCtx.createOscillator();
@@ -720,6 +726,9 @@
       // 3. Écriture du Statut
       cursorStatus.style.display = 'inline-block';
       await typeEffect(typeStatusEl, statusText);
+      
+      // Activation du clignotement infini en fin d'écriture
+      cursorStatus.classList.add('blink');
       
       playReadyChime();
 
