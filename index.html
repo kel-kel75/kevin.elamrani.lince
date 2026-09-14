@@ -26,41 +26,10 @@
       margin: 0;
       padding: 20px;
       text-transform: lowercase;
-      text-shadow: 0 0 4px var(--term-green-glow);
-      filter: contrast(1.1) brightness(1.05);
       position: relative;
       overflow-x: hidden;
-    }
-
-    /* EFFET BALAYAGE CATHODIQUE (SCANLINES + FLICKER) */
-    body::before {
-      content: " ";
-      display: block;
-      position: fixed;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
-      background-size: 100% 4px;
-      z-index: 999;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-
-    body::after {
-      content: " ";
-      display: block;
-      position: fixed;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: rgba(18, 16, 16, 0.1);
-      opacity: 0;
-      z-index: 998;
-      pointer-events: none;
-      animation: flicker 0.15s infinite;
-    }
-
-    @keyframes flicker {
-      0% { opacity: 0.02; }
-      50% { opacity: 0.06; }
-      100% { opacity: 0.01; }
+      /* Micro-flicker JS appliqué sur l'ensemble sans altérer les iFrames */
+      transition: filter 0.05s ease;
     }
 
     .container {
@@ -76,6 +45,11 @@
       background: rgba(0, 20, 0, 0.6);
       box-shadow: 0 0 10px var(--term-green-glow);
       position: relative;
+    }
+
+    /* GLOW CIBLÉ EXCLUSIVEMENT SUR LES TEXTES */
+    h1, .prompt-line, .card-id {
+      text-shadow: 0 0 5px var(--term-green-glow), 0 0 10px rgba(0, 255, 65, 0.2);
     }
 
     h1 {
@@ -96,7 +70,7 @@
 
     .prompt-line span.email-span {
       color: #fff;
-      text-shadow: 0 0 5px #fff;
+      text-shadow: 0 0 6px #fff, 0 0 12px var(--term-green-glow);
       user-select: text;
       cursor: text;
     }
@@ -107,8 +81,8 @@
       width: 10px;
       height: 1.1em;
       background: var(--term-green);
+      box-shadow: 0 0 8px var(--term-green);
       vertical-align: bottom;
-      animation: blink 0.8s infinite;
       margin-left: 4px;
     }
 
@@ -154,7 +128,6 @@
     }
 
     /* DÉSYNCHRONISATION ET EFFET WAVE SUR LES 76 CURSEURS */
-    /* On applique une fonction 'calc' dynamique sur les 76 cartes */
     .video-card .cursor {
       animation: blink 1.2s infinite ease-in-out;
     }
@@ -237,13 +210,12 @@
     .video-card:nth-child(75) .cursor { animation-delay: 0.75s; }
     .video-card:nth-child(76) .cursor { animation-delay: 0.80s; }
 
-    /* LECTEUR IFRAME */
+    /* LECTEUR IFRAME NET (SANS FILTRE DE BALAYAGE) */
     .video-card iframe {
       width: 100%;
       aspect-ratio: 16 / 9;
       border: 1px solid #111;
       display: block;
-      filter: blur(0.2px) contrast(1.05);
     }
 
     a {
@@ -657,6 +629,18 @@
   </div>
 
   <script>
+    /* MICRO-SCINTILLEMENT CATHODIQUE DISCRET (JS) */
+    function subtleCrtFlicker() {
+      // Variation minime de contraste et luminosité
+      const contrast = 1 + (Math.random() * 0.04 - 0.02); // 0.98 à 1.02
+      const brightness = 1 + (Math.random() * 0.03 - 0.015); // 0.985 à 1.015
+      document.body.style.filter = `contrast(${contrast}) brightness(${brightness})`;
+      
+      // Prochain saut à intervalle aléatoire très rapide
+      setTimeout(subtleCrtFlicker, Math.random() * 120 + 40);
+    }
+    subtleCrtFlicker();
+
     /* SYNTHÈSE AUDIO VIA WEB AUDIO API */
     let audioCtx = null;
 
