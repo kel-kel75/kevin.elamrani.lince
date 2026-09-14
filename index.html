@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>director - kevin elamrani-lince</title>
   
+  <!-- FAVICON AVEC CACHE BUSTING -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+
   <style>
     /* POLICE ET VARIABLES TERMINAL HACKER */
     :root {
-      --bg-color: #000000; /* NOIR ABSOLU POUR PROFONDEUR ET CONTRASTE */
+      --bg-color: #000000;
       --term-green: #00ff41;
       --term-green-dim: #008f11;
       --term-green-glow: rgba(0, 255, 65, 0.4);
@@ -36,7 +39,6 @@
       margin: 0 auto;
     }
 
-    /* HEADER STYLE SHELL / SYSTEM LOG (NET, SOBRE, SANS GLOW DE BLOC) */
     header {
       border: 1px solid var(--term-green-dim);
       padding: 15px;
@@ -45,7 +47,6 @@
       position: relative;
     }
 
-    /* GLOW CIBLÉ EXCLUSIVEMENT SUR LES TEXTES ET LE TYPAGE */
     h1, .prompt-line, .card-id {
       text-shadow: 0 0 5px var(--term-green-glow), 0 0 10px rgba(0, 255, 65, 0.2);
     }
@@ -73,7 +74,6 @@
       cursor: text;
     }
 
-    /* CURSEUR TERMINAL CLASSIQUE */
     .cursor {
       display: inline-block;
       width: 10px;
@@ -84,7 +84,6 @@
       margin-left: 4px;
     }
 
-    /* ANIMATION DE CLIGNOTEMENT REQUIS SUR READY */
     .cursor.blink {
       animation: blink-cursor 1s steps(2, start) infinite;
     }
@@ -95,7 +94,6 @@
       }
     }
 
-    /* GRILLE BRUTALE MATRIX */
     .video-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -116,13 +114,11 @@
       transform: translateY(0);
     }
 
-    /* HOVER ELEGANT ET MINIMALISTE (SEULEMENT DÉFINITION DU BORD) */
     .video-card:hover {
       border-style: solid;
       border-color: var(--term-green);
     }
 
-    /* CONTENEUR DE TITRE DE LA CARTE AVEC BALAYEUSE K-2000 */
     .card-id {
       display: block;
       font-size: 0.75rem;
@@ -134,32 +130,35 @@
       overflow: hidden;
     }
 
-    /* EFFET BALAYEUSE (KITT / K-2000) */
+    /* BALAYEUSE K-2000 FLUIDE ET DOUCE (SANS SAUT DE DIRECTION) */
     .scanner-bar {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 20px;
+      width: 70px;
       height: 2px;
       background: var(--term-green);
-      box-shadow: 0 0 6px var(--term-green);
-      border-radius: 1px;
+      /* Halo vert étendu */
+      box-shadow: 0 0 10px var(--term-green), 0 0 20px rgba(0, 255, 65, 0.6);
+      /* Masque en dégradé pour créer un fondu naturel aux deux extrémités sans sauts */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 50%, transparent 100%);
       opacity: 0.85;
-      animation: kitt-scan 2.5s ease-in-out infinite alternate;
+      /* Animation avec courbe de vitesse très douce */
+      animation: kitt-scan 4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
     }
 
     @keyframes kitt-scan {
       0% {
         left: 0%;
-        transform: translateX(0%);
+        transform: translateX(-100%);
       }
       100% {
         left: 100%;
-        transform: translateX(-100%);
+        transform: translateX(0%);
       }
     }
 
-    /* LECTEUR IFRAME NET */
     .video-card iframe {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -182,395 +181,395 @@
 
   <div class="container">
     <header id="header-box">
-      <!-- 1. Titre -->
       <h1><span id="type-title"></span><span id="cursor-title" class="cursor"></span></h1>
-      
-      <!-- 2. Ligne E-mail -->
       <div class="prompt-line"><span id="type-email-label"></span><span class="email-span" id="type-email-val"></span><span id="cursor-email" class="cursor" style="display:none;"></span></div>
-      
-      <!-- 3. Ligne de Statut -->
       <div class="prompt-line"><span id="type-status"></span><span id="cursor-status" class="cursor" style="display:none;"></span></div>
     </header>
 
     <main class="video-grid" id="grid">
 
-      <div class="video-card" data-id="[ stream_01 // fe-bchdzgsk ]">
-        <div class="card-id">[ stream_01 // fe-bchdzgsk ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_01 // d9mrq9_yyc4 ]">
+        <div class="card-id">[ stream_01 // d9mrq9_yyc4 ]<span class="scanner-bar"></span></div>
+        <iframe src="https://www.youtube.com/embed/D9mrQ9_Yyc4?si=1oaPIcUeBUo809kp" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
+      </div>
+
+      <div class="video-card" data-id="[ stream_02 // fe-bchdzgsk ]">
+        <div class="card-id">[ stream_02 // fe-bchdzgsk ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/Fe-BcHDzgSk?si=E1uYo92Tr7r9L1ka" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_02 // bqa8dadmj7y ]">
-        <div class="card-id">[ stream_02 // bqa8dadmj7y ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_03 // bqa8dadmj7y ]">
+        <div class="card-id">[ stream_03 // bqa8dadmj7y ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/bQa8Dadmj7Y?si=3IJ1R6ElfX025Rxa" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_03 // a91yjemcgqw ]">
-        <div class="card-id">[ stream_03 // a91yjemcgqw ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_04 // a91yjemcgqw ]">
+        <div class="card-id">[ stream_04 // a91yjemcgqw ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/A91yjEmCGQw?si=cEP_3G0vH7KlKB48" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_04 // xrzlip6eqau ]">
-        <div class="card-id">[ stream_04 // xrzlip6eqau ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_05 // xrzlip6eqau ]">
+        <div class="card-id">[ stream_05 // xrzlip6eqau ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/XrZLIp6eqAU?si=TRTIojby012Z_B5C" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_05 // nzylllc4ai4 ]">
-        <div class="card-id">[ stream_05 // nzylllc4ai4 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_06 // nzylllc4ai4 ]">
+        <div class="card-id">[ stream_06 // nzylllc4ai4 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/nzYllLc4ai4?si=HJOJ-Ihb8z1Z4UZC" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_06 // edcte26opma ]">
-        <div class="card-id">[ stream_06 // edcte26opma ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_07 // edcte26opma ]">
+        <div class="card-id">[ stream_07 // edcte26opma ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/edcte26opMA?si=iw2HrflszZ1TZD4u" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_07 // pvcfclsrgts ]">
-        <div class="card-id">[ stream_07 // pvcfclsrgts ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_08 // pvcfclsrgts ]">
+        <div class="card-id">[ stream_08 // pvcfclsrgts ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/PvcfclSrgTs?si=EpO8xNvWPJ7qnaec" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_08 // spsen9oozqu ]">
-        <div class="card-id">[ stream_08 // spsen9oozqu ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_09 // spsen9oozqu ]">
+        <div class="card-id">[ stream_09 // spsen9oozqu ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/SPSen9OOZQU?si=bUu17zNYMTkP93R7" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_09 // a_ipaud8sni ]">
-        <div class="card-id">[ stream_09 // a_ipaud8sni ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_10 // a_ipaud8sni ]">
+        <div class="card-id">[ stream_10 // a_ipaud8sni ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/a_Ipaud8SnI?si=hZf1WkB3Q3aEZLRO" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_10 // rvnrujbqwv4 ]">
-        <div class="card-id">[ stream_10 // rvnrujbqwv4 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_11 // rvnrujbqwv4 ]">
+        <div class="card-id">[ stream_11 // rvnrujbqwv4 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/rVNrUJbQwv4?si=Zs5_EddRSE009jD_" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_11 // shsavrgry64 ]">
-        <div class="card-id">[ stream_11 // shsavrgry64 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_12 // shsavrgry64 ]">
+        <div class="card-id">[ stream_12 // shsavrgry64 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/shSAVrGry64?si=lEEBIr6Oj7uVj3o3" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_12 // fypt1xgy250 ]">
-        <div class="card-id">[ stream_12 // fypt1xgy250 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_13 // fypt1xgy250 ]">
+        <div class="card-id">[ stream_13 // fypt1xgy250 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/fYpT1XGy250?si=9y-Em1WrIvt_HxHf" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_13 // gaugacm9nas ]">
-        <div class="card-id">[ stream_13 // gaugacm9nas ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_14 // gaugacm9nas ]">
+        <div class="card-id">[ stream_14 // gaugacm9nas ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/gaUGacM9NAs?si=3u9SzeD0KmY4KBWC" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_14 // 8gnsip2kxw0 ]">
-        <div class="card-id">[ stream_14 // 8gnsip2kxw0 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_15 // 8gnsip2kxw0 ]">
+        <div class="card-id">[ stream_15 // 8gnsip2kxw0 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/8GNsiP2kxw0?si=zFtC4C5aqwSrK2uD" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_15 // xuowcjakqy ]">
-        <div class="card-id">[ stream_15 // xuowcjakqy ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_16 // xuowcjakqy ]">
+        <div class="card-id">[ stream_16 // xuowcjakqy ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/XuowcJaKq9Y?si=Fukmvtt_SL8HtPdF" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_16 // dtu9d3gvvxw ]">
-        <div class="card-id">[ stream_16 // dtu9d3gvvxw ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_17 // dtu9d3gvvxw ]">
+        <div class="card-id">[ stream_17 // dtu9d3gvvxw ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/dtU9D3gVvxw?si=_McB1Bvy5FDFPGQH" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_17 // n8v6o7pxsle ]">
-        <div class="card-id">[ stream_17 // n8v6o7pxsle ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_18 // n8v6o7pxsle ]">
+        <div class="card-id">[ stream_18 // n8v6o7pxsle ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/n8v6O7PxsLE?si=HFwwOS2d6thRCRSv" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_18 // ofkw16dqa9c ]">
-        <div class="card-id">[ stream_18 // ofkw16dqa9c ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_19 // ofkw16dqa9c ]">
+        <div class="card-id">[ stream_19 // ofkw16dqa9c ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/OFKw16dqa9c?si=jIDZrBCJRTAcHsif" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_19 // rwf0emxktdu ]">
-        <div class="card-id">[ stream_19 // rwf0emxktdu ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_20 // rwf0emxktdu ]">
+        <div class="card-id">[ stream_20 // rwf0emxktdu ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/rWF0EMxKtdU?si=Si7bnUKk4kPFnegj" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_20 // uew5asyob-a ]">
-        <div class="card-id">[ stream_20 // uew5asyob-a ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_21 // uew5asyob-a ]">
+        <div class="card-id">[ stream_21 // uew5asyob-a ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/ueW5aSYOB-A?si=e_ZVzlK5fpEUJ6zh" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_21 // t2rvbmoolrq ]">
-        <div class="card-id">[ stream_21 // t2rvbmoolrq ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_22 // t2rvbmoolrq ]">
+        <div class="card-id">[ stream_22 // t2rvbmoolrq ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/T2RVbMoOlrQ?si=zsR5AgPuJsissUl_" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_22 // gcmk5zvoz4q ]">
-        <div class="card-id">[ stream_22 // gcmk5zvoz4q ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_23 // gcmk5zvoz4q ]">
+        <div class="card-id">[ stream_23 // gcmk5zvoz4q ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/GcmK5zVoz4Q?si=84piXW-LU4Od7TDN" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_23 // aet8gfgp-gi ]">
-        <div class="card-id">[ stream_23 // aet8gfgp-gi ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_24 // aet8gfgp-gi ]">
+        <div class="card-id">[ stream_24 // aet8gfgp-gi ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/AET8GFGp-GI?si=Ra5l4cOEq735HJrE" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_24 // g8bpjmdzxy ]">
-        <div class="card-id">[ stream_24 // g8bpjmdzxy ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_25 // g8bpjmdzxy ]">
+        <div class="card-id">[ stream_25 // g8bpjmdzxy ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/G8BpjMjdzXY?si=wo525-chOiHVH6ic" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_25 // tpio-x_cyne ]">
-        <div class="card-id">[ stream_25 // tpio-x_cyne ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_26 // tpio-x_cyne ]">
+        <div class="card-id">[ stream_26 // tpio-x_cyne ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/tpiO-x_CyNE?si=zwVdPGwlLajQOnAu" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_26 // s2g5jlayp7c ]">
-        <div class="card-id">[ stream_26 // s2g5jlayp7c ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_27 // s2g5jlayp7c ]">
+        <div class="card-id">[ stream_27 // s2g5jlayp7c ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/s2G5jLayP7c?si=IuAJeoN9xwQCm55W" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_27 // goepdji_yai ]">
-        <div class="card-id">[ stream_27 // goepdji_yai ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_28 // goepdji_yai ]">
+        <div class="card-id">[ stream_28 // goepdji_yai ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/GOEPdjI_YAI?si=DBBOaF_-BxU_gA95" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_28 // gio_uglfhdc ]">
-        <div class="card-id">[ stream_28 // gio_uglfhdc ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_29 // gio_uglfhdc ]">
+        <div class="card-id">[ stream_29 // gio_uglfhdc ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/Gio_UglfhDc?si=rI5AkptoMz8IO09l" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_29 // cmrzywz6yko ]">
-        <div class="card-id">[ stream_29 // cmrzywz6yko ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_30 // cmrzywz6yko ]">
+        <div class="card-id">[ stream_30 // cmrzywz6yko ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/CmrzyWz6yKo?si=rvtIo8PW4Wfly9JF" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_30 // pzqs7aw7xeg ]">
-        <div class="card-id">[ stream_30 // pzqs7aw7xeg ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_31 // pzqs7aw7xeg ]">
+        <div class="card-id">[ stream_31 // pzqs7aw7xeg ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/PZqS7AW7xEg?si=rJFJSJBjTpnEzRub" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_31 // syukklpcuti ]">
-        <div class="card-id">[ stream_31 // syukklpcuti ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_32 // syukklpcuti ]">
+        <div class="card-id">[ stream_32 // syukklpcuti ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/sYUKKlpcuTI?si=2y5PnBmd2zl0SHk6" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_32 // dvxptljmi0c ]">
-        <div class="card-id">[ stream_32 // dvxptljmi0c ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_33 // dvxptljmi0c ]">
+        <div class="card-id">[ stream_33 // dvxptljmi0c ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/DVXpTLjmI0c?si=pZIa5Da4lkwkXQYv" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_33 // u5bwry-hcnq ]">
-        <div class="card-id">[ stream_33 // u5bwry-hcnq ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_34 // u5bwry-hcnq ]">
+        <div class="card-id">[ stream_34 // u5bwry-hcnq ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/U5bwRY-HcNQ?si=bZL58zNjjIDz5PjU" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_34 // l_6by6-8zxg ]">
-        <div class="card-id">[ stream_34 // l_6by6-8zxg ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_35 // l_6by6-8zxg ]">
+        <div class="card-id">[ stream_35 // l_6by6-8zxg ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/l_6by6-8zxg?si=YfnEEJvJj3V1H116" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_35 // ofkw16dqa9c_2 ]">
-        <div class="card-id">[ stream_35 // ofkw16dqa9c_2 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_36 // ofkw16dqa9c_2 ]">
+        <div class="card-id">[ stream_36 // ofkw16dqa9c_2 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/OFKw16dqa9c?si=s7vREhIoqkbVtbhD" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_36 // jgse8_jpaoq ]">
-        <div class="card-id">[ stream_36 // jgse8_jpaoq ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_37 // jgse8_jpaoq ]">
+        <div class="card-id">[ stream_37 // jgse8_jpaoq ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/jGse8_jPaoQ?si=45xY1J4dcV2xTt93" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_37 // wqdrr-9j7zy ]">
-        <div class="card-id">[ stream_37 // wqdrr-9j7zy ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_38 // wqdrr-9j7zy ]">
+        <div class="card-id">[ stream_38 // wqdrr-9j7zy ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/wQDRr-9J7zY?si=TePliAeYDUv-4ygf" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_38 // smpmfbvhlvs ]">
-        <div class="card-id">[ stream_38 // smpmfbvhlvs ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_39 // smpmfbvhlvs ]">
+        <div class="card-id">[ stream_39 // smpmfbvhlvs ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/sMpmFbVHlvs?si=6_hOt2qdFUORG5WK" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_39 // rfrrsmclqhy ]">
-        <div class="card-id">[ stream_39 // rfrrsmclqhy ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_40 // rfrrsmclqhy ]">
+        <div class="card-id">[ stream_40 // rfrrsmclqhy ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/rfrRsMclQhY?si=-RKpORx24PEZEUuB" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_40 // x2msa2s0yza ]">
-        <div class="card-id">[ stream_40 // x2msa2s0yza ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_41 // x2msa2s0yza ]">
+        <div class="card-id">[ stream_41 // x2msa2s0yza ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/x2MsA2s0yzA?si=1gHLmmJTD0dEBjW_" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_41 // fthymic3dqe ]">
-        <div class="card-id">[ stream_41 // fthymic3dqe ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_42 // fthymic3dqe ]">
+        <div class="card-id">[ stream_42 // fthymic3dqe ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/ftHyMiC3dQE?si=ScEPb27sBMP8S8p3" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_42 // deiyjvi5ltu ]">
-        <div class="card-id">[ stream_42 // deiyjvi5ltu ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_43 // deiyjvi5ltu ]">
+        <div class="card-id">[ stream_43 // deiyjvi5ltu ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/dEIYjvi5ltU?si=WoI1Hnuu5uPAVH-g" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_43 // npthvatp2iu ]">
-        <div class="card-id">[ stream_43 // npthvatp2iu ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_44 // npthvatp2iu ]">
+        <div class="card-id">[ stream_44 // npthvatp2iu ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/NPTHvAtP2iU?si=djhxgdNZkrReJLU6" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_44 // awb38beqjaq ]">
-        <div class="card-id">[ stream_44 // awb38beqjaq ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_45 // awb38beqjaq ]">
+        <div class="card-id">[ stream_45 // awb38beqjaq ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/Awb38bEqjAQ?si=OrquBjfdxv8oPeok" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_45 // ozl-lspufm4 ]">
-        <div class="card-id">[ stream_45 // ozl-lspufm4 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_46 // ozl-lspufm4 ]">
+        <div class="card-id">[ stream_46 // ozl-lspufm4 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/OZl-lspuFm4?si=cjD1WWImT_Uu3MCc" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_46 // aypdjixnl-o ]">
-        <div class="card-id">[ stream_46 // aypdjixnl-o ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_47 // aypdjixnl-o ]">
+        <div class="card-id">[ stream_47 // aypdjixnl-o ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/AYPdJixNl-o?si=Gvu-E-IbdReBkSsZ" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_47 // ylcndkedlbs ]">
-        <div class="card-id">[ stream_47 // ylcndkedlbs ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_48 // ylcndkedlbs ]">
+        <div class="card-id">[ stream_48 // ylcndkedlbs ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/YLcndKedLbs?si=fNExNN6jdxn5hc8p" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_48 // 52rd8ue0wus ]">
-        <div class="card-id">[ stream_48 // 52rd8ue0wus ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_49 // 52rd8ue0wus ]">
+        <div class="card-id">[ stream_49 // 52rd8ue0wus ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/52Rd8Ue0wUs?si=Bq78TiYUsGl5vtAM" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_49 // _cqgsxcrre4 ]">
-        <div class="card-id">[ stream_49 // _cqgsxcrre4 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_50 // _cqgsxcrre4 ]">
+        <div class="card-id">[ stream_50 // _cqgsxcrre4 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/_CQGSxCRRe4?si=JWPFuiWnZ2HFa5wo" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_50 // 5vhg-72_vdg ]">
-        <div class="card-id">[ stream_50 // 5vhg-72_vdg ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_51 // 5vhg-72_vdg ]">
+        <div class="card-id">[ stream_51 // 5vhg-72_vdg ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/5VHG-72_VDg?si=loHu-xy_MXUKH15A" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_51 // rglxowjeobu ]">
-        <div class="card-id">[ stream_51 // rglxowjeobu ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_52 // rglxowjeobu ]">
+        <div class="card-id">[ stream_52 // rglxowjeobu ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/rGlXOWJEOBU?si=czKEpVLQqvNncKH9" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_52 // lqggapqgen8 ]">
-        <div class="card-id">[ stream_52 // lqggapqgen8 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_53 // lqggapqgen8 ]">
+        <div class="card-id">[ stream_53 // lqggapqgen8 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/lqggAPQGeN8?si=f6-PcVup71O02pnA" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_53 // eqs20nvfjka ]">
-        <div class="card-id">[ stream_53 // eqs20nvfjka ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_54 // eqs20nvfjka ]">
+        <div class="card-id">[ stream_54 // eqs20nvfjka ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/Eqs20nVFjkA?si=e4JXq_OdNq88ZFdQ" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_54 // c5onclew8g4 ]">
-        <div class="card-id">[ stream_54 // c5onclew8g4 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_55 // c5onclew8g4 ]">
+        <div class="card-id">[ stream_55 // c5onclew8g4 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/C5onCLew8G4?si=MvNpOwpcW5OKiGxL" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_55 // jp5xa1axcsc ]">
-        <div class="card-id">[ stream_55 // jp5xa1axcsc ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_56 // jp5xa1axcsc ]">
+        <div class="card-id">[ stream_56 // jp5xa1axcsc ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/jP5xa1AXcsc?si=PMa-K2_jrM_QlcKx" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_56 // drxo6ad6i4s ]">
-        <div class="card-id">[ stream_56 // drxo6ad6i4s ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_57 // drxo6ad6i4s ]">
+        <div class="card-id">[ stream_57 // drxo6ad6i4s ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/Drxo6ad6I4s?si=RMJNh8VPjnPxmWbp" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_57 // nkklzsemfta ]">
-        <div class="card-id">[ stream_57 // nkklzsemfta ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_58 // nkklzsemfta ]">
+        <div class="card-id">[ stream_58 // nkklzsemfta ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/nkkLzSemfTA?si=VulwI0uFwHWbJgyV" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_58 // yfl7dtfp3jg ]">
-        <div class="card-id">[ stream_58 // yfl7dtfp3jg ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_59 // yfl7dtfp3jg ]">
+        <div class="card-id">[ stream_59 // yfl7dtfp3jg ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/YFL7dTFp3Jg?si=b-NQr08KDb9Xe7Nm" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_59 // eu1jj9-vvls ]">
-        <div class="card-id">[ stream_59 // eu1jj9-vvls ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_60 // eu1jj9-vvls ]">
+        <div class="card-id">[ stream_60 // eu1jj9-vvls ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/eu1jJ9-VvLs?si=d9DelEPiY3ya2yFP" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_60 // x7tmfrhghlu ]">
-        <div class="card-id">[ stream_60 // x7tmfrhghlu ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_61 // x7tmfrhghlu ]">
+        <div class="card-id">[ stream_61 // x7tmfrhghlu ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/x7TMfrHgHLU?si=SvgdwZnfMHLmbTMx" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_61 // mw6mexrrb7i ]">
-        <div class="card-id">[ stream_61 // mw6mexrrb7i ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_62 // mw6mexrrb7i ]">
+        <div class="card-id">[ stream_62 // mw6mexrrb7i ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/MW6MexRrB7I?si=clzi4u7OVjXSqnJB" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_62 // lstbkmzko-o ]">
-        <div class="card-id">[ stream_62 // lstbkmzko-o ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_63 // lstbkmzko-o ]">
+        <div class="card-id">[ stream_63 // lstbkmzko-o ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/LStBkmZKO-o?si=yO58Td_9aiNk5oYS" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_63 // ubuf3veayca ]">
-        <div class="card-id">[ stream_63 // ubuf3veayca ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_64 // ubuf3veayca ]">
+        <div class="card-id">[ stream_64 // ubuf3veayca ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/UbuF3veaYCA?si=bxEFmzBN-7OtROZ6" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_64 // fbu7duocrw4 ]">
-        <div class="card-id">[ stream_64 // fbu7duocrw4 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_65 // fbu7duocrw4 ]">
+        <div class="card-id">[ stream_65 // fbu7duocrw4 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/Fbu7dUOCRw4?si=KE6rVsibW7hcp42l" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_65 // ruqjxn2eb2e ]">
-        <div class="card-id">[ stream_65 // ruqjxn2eb2e ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_66 // ruqjxn2eb2e ]">
+        <div class="card-id">[ stream_66 // ruqjxn2eb2e ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/rUqjXN2eB2E?si=SZs-UEsvAxv2Qz3a" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_66 // obvfznwavsw ]">
-        <div class="card-id">[ stream_66 // obvfznwavsw ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_67 // obvfznwavsw ]">
+        <div class="card-id">[ stream_67 // obvfznwavsw ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/ObvfZNwAvsw?si=1WCIAW78DYJuQ7N_" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_67 // h5fydjlo1nu ]">
-        <div class="card-id">[ stream_67 // h5fydjlo1nu ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_68 // h5fydjlo1nu ]">
+        <div class="card-id">[ stream_68 // h5fydjlo1nu ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/h5FYDJlo1nU?si=9Bl1r0smh3qIiJ3T" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_68 // py-5q20t9gq ]">
-        <div class="card-id">[ stream_68 // py-5q20t9gq ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_69 // py-5q20t9gq ]">
+        <div class="card-id">[ stream_69 // py-5q20t9gq ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/PY-5q20t9gQ?si=74rjlgUyWxWZtFge" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_69 // uglbes8mmwq ]">
-        <div class="card-id">[ stream_69 // uglbes8mmwq ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_70 // uglbes8mmwq ]">
+        <div class="card-id">[ stream_70 // uglbes8mmwq ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/UgLbEs8mMwQ?si=BYY_DApudNks1BCR" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_70 // smpo8hb8rkg ]">
-        <div class="card-id">[ stream_70 // smpo8hb8rkg ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_71 // smpo8hb8rkg ]">
+        <div class="card-id">[ stream_71 // smpo8hb8rkg ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/Smpo8Hb8rkg?si=oCHdwfI1A8b71hbl" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_71 // nse3xk5s5lm ]">
-        <div class="card-id">[ stream_71 // nse3xk5s5lm ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_72 // nse3xk5s5lm ]">
+        <div class="card-id">[ stream_72 // nse3xk5s5lm ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/nSe3XK5s5LM?si=q3xdoD-vBBYcWBTa" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_72 // eq3u3yrptis ]">
-        <div class="card-id">[ stream_72 // eq3u3yrptis ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_73 // eq3u3yrptis ]">
+        <div class="card-id">[ stream_73 // eq3u3yrptis ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/EQ3u3Yrptis?si=B4Sv_NHZV3LebmhB" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_73 // sxlpbeqkd98 ]">
-        <div class="card-id">[ stream_73 // sxlpbeqkd98 ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_74 // sxlpbeqkd98 ]">
+        <div class="card-id">[ stream_74 // sxlpbeqkd98 ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/sxLPbEqkD98?si=uQtzBZMH7r7tsPgX" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_74 // qpunkyl-edc ]">
-        <div class="card-id">[ stream_74 // qpunkyl-edc ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_75 // qpunkyl-edc ]">
+        <div class="card-id">[ stream_75 // qpunkyl-edc ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/QPUNKY-LeDc?si=iSTHJnFvUu5E9KHP" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_75 // jbzuds_wvlk ]">
-        <div class="card-id">[ stream_75 // jbzuds_wvlk ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_76 // jbzuds_wvlk ]">
+        <div class="card-id">[ stream_76 // jbzuds_wvlk ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/jBZuds_wVLk?si=k2IJ8l5qvOymShQ9" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
-      <div class="video-card" data-id="[ stream_76 // nte4ssfqi5i ]">
-        <div class="card-id">[ stream_76 // nte4ssfqi5i ]<span class="scanner-bar"></span></div>
+      <div class="video-card" data-id="[ stream_77 // nte4ssfqi5i ]">
+        <div class="card-id">[ stream_77 // nte4ssfqi5i ]<span class="scanner-bar"></span></div>
         <iframe src="https://www.youtube.com/embed/NtE4SsFQi5I?si=gK1SgG7YEkXJaBHO" title="YouTube video player" allowfullscreen loading="lazy"></iframe>
       </div>
 
@@ -578,19 +577,19 @@
   </div>
 
   <script>
-    /* DÉSYNCHRONISATION ET RANDOMISATION DU SCANNER K-2000 */
+    /* DÉSYNCHRONISATION RANDOMISÉE HARMONIEUSE */
     function randomizeScanners() {
       const scanners = document.querySelectorAll('.scanner-bar');
       scanners.forEach(bar => {
-        const duration = (Math.random() * 2 + 1.8).toFixed(2);
-        const delay = (Math.random() * 3).toFixed(2);
+        // Durées légèrement variables (entre 3.2s et 5.2s) pour la désynchronisation naturelle
+        const duration = (Math.random() * 2 + 3.2).toFixed(2);
+        const delay = (Math.random() * 4).toFixed(2);
         
         bar.style.animationDuration = `${duration}s`;
         bar.style.animationDelay = `${delay}s`;
       });
     }
 
-    /* MICRO-SCINTILLEMENT CATHODIQUE DISCRET (JS) */
     function subtleCrtFlicker() {
       const contrast = 1 + (Math.random() * 0.04 - 0.02);
       const brightness = 1 + (Math.random() * 0.03 - 0.015);
@@ -599,7 +598,6 @@
     }
     subtleCrtFlicker();
 
-    /* SYNTHÈSE AUDIO VIA WEB AUDIO API */
     let audioCtx = null;
 
     function initAudio() {
@@ -673,11 +671,10 @@
       osc.stop(audioCtx.currentTime + 0.5);
     }
 
-    /* TEXTES & SÉQUENCEUR */
     const titleText = "director // kevin.elamrani-lince";
     const emailLabelText = "e-mail: ";
     const emailValueText = "contact@kevin-elamrani-lince.com";
-    const statusText = "status: 76_streams_indexed // ready_";
+    const statusText = "status: 77_streams_indexed // ready_";
 
     const typeTitleEl = document.getElementById('type-title');
     const typeEmailLabelEl = document.getElementById('type-email-label');
@@ -710,27 +707,22 @@
       initAudio();
       randomizeScanners();
 
-      // 1. Écriture du Titre
       cursorTitle.style.display = 'inline-block';
       await typeEffect(typeTitleEl, titleText);
       cursorTitle.style.display = 'none';
 
-      // 2. Écriture de la ligne E-mail
       cursorEmail.style.display = 'inline-block';
       await typeEffect(typeEmailLabelEl, emailLabelText);
       await typeEffect(typeEmailValEl, emailValueText);
       cursorEmail.style.display = 'none';
 
-      // 3. Écriture du Statut
       cursorStatus.style.display = 'inline-block';
       await typeEffect(typeStatusEl, statusText);
       
-      // Activation du clignotement infini en fin d'écriture
       cursorStatus.classList.add('blink');
       
       playReadyChime();
 
-      // 4. Déploiement séquentiel des vidéos
       for (let i = 0; i < cards.length; i++) {
         cards[i].classList.add('visible');
         if (i % 3 === 0) playMotherBeep();
