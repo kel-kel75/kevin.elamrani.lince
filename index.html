@@ -8,7 +8,7 @@
   <style>
     /* POLICE ET VARIABLES TERMINAL HACKER */
     :root {
-      --bg-color: #000000;
+      --bg-color: #000000; /* NOIR ABSOLU POUR PROFONDEUR ET CONTRASTE */
       --term-green: #00ff41;
       --term-green-dim: #008f11;
       --term-green-glow: rgba(0, 255, 65, 0.4);
@@ -36,17 +36,16 @@
       margin: 0 auto;
     }
 
-    /* HEADER STYLE SHELL / SYSTEM LOG */
+    /* HEADER STYLE SHELL / SYSTEM LOG (NET, SOBRE, SANS GLOW DE BLOC) */
     header {
       border: 1px solid var(--term-green-dim);
       padding: 15px;
       margin-bottom: 30px;
-      background: rgba(0, 20, 0, 0.6);
-      box-shadow: 0 0 10px var(--term-green-glow);
+      background: #000000;
       position: relative;
     }
 
-    /* GLOW CIBLÉ EXCLUSIVEMENT SUR LES TEXTES */
+    /* GLOW CIBLÉ EXCLUSIVEMENT SUR LES TEXTES ET LE TYPAGE */
     h1, .prompt-line, .card-id {
       text-shadow: 0 0 5px var(--term-green-glow), 0 0 10px rgba(0, 255, 65, 0.2);
     }
@@ -105,9 +104,9 @@
 
     .video-card {
       border: 1px dashed var(--term-green-dim);
-      background: #000;
+      background: #000000;
       padding: 8px;
-      transition: all 0.2s ease-in-out;
+      transition: border-color 0.2s ease, opacity 0.3s ease, transform 0.3s ease;
       opacity: 0;
       transform: translateY(10px);
     }
@@ -117,11 +116,10 @@
       transform: translateY(0);
     }
 
+    /* HOVER ELEGANT ET MINIMALISTE (SEULEMENT DÉFINITION DU BORD) */
     .video-card:hover {
       border-style: solid;
       border-color: var(--term-green);
-      box-shadow: 0 0 15px var(--term-green-glow);
-      transform: scale(1.01);
     }
 
     /* CONTENEUR DE TITRE DE LA CARTE AVEC BALAYEUSE K-2000 */
@@ -144,7 +142,7 @@
       width: 20px;
       height: 2px;
       background: var(--term-green);
-      box-shadow: 0 0 8px var(--term-green), 0 0 12px var(--term-green);
+      box-shadow: 0 0 6px var(--term-green);
       border-radius: 1px;
       opacity: 0.85;
       animation: kitt-scan 2.5s ease-in-out infinite alternate;
