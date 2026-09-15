@@ -15,7 +15,7 @@
       --term-green: #00ff41;
       --term-green-dim: #008f11;
       --term-green-glow: rgba(0, 255, 65, 0.4);
-      --font-stack: "Courier New", Courier, Lucida Console, Monaco, Consolas, monospace;
+      --font-stack: "American Typewriter", "Courier New", Courier, Georgia, serif;
     }
 
     * {
@@ -130,7 +130,7 @@
       overflow: hidden;
     }
 
-    /* BALAYEUSE K-2000 FLUIDE ET DOUCE */
+    /* BALAYEUSE K-2000 FLUIDE ET DOUCE (SANS SAUT DE DIRECTION) */
     .scanner-bar {
       position: absolute;
       bottom: 0;
@@ -138,10 +138,13 @@
       width: 70px;
       height: 2px;
       background: var(--term-green);
+      /* Halo vert étendu */
       box-shadow: 0 0 10px var(--term-green), 0 0 20px rgba(0, 255, 65, 0.6);
+      /* Masque en dégradé pour créer un fondu naturel aux deux extrémités sans sauts */
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0%, black 50%, transparent 100%);
       opacity: 0.85;
+      /* Animation avec courbe de vitesse très douce */
       animation: kitt-scan 4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
     }
 
@@ -156,35 +159,60 @@
       }
     }
 
-    /* VIGNETTE SANS INTERFACE YOUTUBE */
-    .yt-placeholder {
+    /* MINIATURES YOUTUBE — AUCUNE INTERFACE YOUTUBE VISIBLE */
+    .video-thumb {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      background: #000;
-      cursor: pointer;
-      border: 1px solid #111;
       overflow: hidden;
+      border: 1px solid #111;
+      background: #050505;
+      cursor: pointer;
     }
 
-    .yt-placeholder img {
+    .video-thumb img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
       display: block;
-      filter: grayscale(20%) contrast(110%);
-      transition: filter 0.3s ease, transform 0.3s ease;
+      object-fit: cover;
+      transition: filter 0.25s ease, transform 0.25s ease;
     }
 
-    .yt-placeholder:hover img {
-      filter: grayscale(0%) contrast(100%);
-      transform: scale(1.02);
+    .video-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.08);
+      pointer-events: none;
+      transition: background 0.25s ease;
     }
 
-    .video-card iframe {
+    .video-thumb:hover img {
+      transform: none;
+      filter: none;
+    }
+
+    .video-thumb:hover::after {
+      background: transparent;
+    }
+
+    .video-thumb:focus-visible {
+      outline: 1px solid var(--term-green);
+      outline-offset: 2px;
+    }
+
+    .video-thumb.is-playing {
+      cursor: default;
+    }
+
+    .video-thumb.is-playing::after {
+      display: none;
+    }
+
+    .video-thumb.is-playing iframe {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      border: 1px solid #111;
+      height: 100%;
+      border: 0;
       display: block;
     }
 
@@ -210,543 +238,389 @@
 
     <main class="video-grid" id="grid">
 
-      <div class="video-card" data-yt-id="D9mrQ9_Yyc4" data-embed="https://www.youtube.com/embed/D9mrQ9_Yyc4?si=1oaPIcUeBUo809kp">
+      <div class="video-card" data-id="[ stream_01 // d9mrq9_yyc4 ]">
         <div class="card-id">[ stream_01 // d9mrq9_yyc4 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/D9mrQ9_Yyc4/hqdefault.jpg" alt="stream_01" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="D9mrQ9_Yyc4" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/D9mrQ9_Yyc4/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/D9mrQ9_Yyc4/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="Fe-BcHDzgSk" data-embed="https://www.youtube.com/embed/Fe-BcHDzgSk?si=E1uYo92Tr7r9L1ka">
+      <div class="video-card" data-id="[ stream_02 // fe-bchdzgsk ]">
         <div class="card-id">[ stream_02 // fe-bchdzgsk ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/Fe-BcHDzgSk/hqdefault.jpg" alt="stream_02" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="Fe-BcHDzgSk" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/Fe-BcHDzgSk/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Fe-BcHDzgSk/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="bQa8Dadmj7Y" data-embed="https://www.youtube.com/embed/bQa8Dadmj7Y?si=3IJ1R6ElfX025Rxa">
+      <div class="video-card" data-id="[ stream_03 // bqa8dadmj7y ]">
         <div class="card-id">[ stream_03 // bqa8dadmj7y ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/bQa8Dadmj7Y/hqdefault.jpg" alt="stream_03" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="bQa8Dadmj7Y" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/bQa8Dadmj7Y/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/bQa8Dadmj7Y/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="A91yjEmCGQw" data-embed="https://www.youtube.com/embed/A91yjEmCGQw?si=cEP_3G0vH7KlKB48">
+      <div class="video-card" data-id="[ stream_04 // a91yjemcgqw ]">
         <div class="card-id">[ stream_04 // a91yjemcgqw ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/A91yjEmCGQw/hqdefault.jpg" alt="stream_04" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="A91yjEmCGQw" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/A91yjEmCGQw/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/A91yjEmCGQw/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="XrZLIp6eqAU" data-embed="https://www.youtube.com/embed/XrZLIp6eqAU?si=TRTIojby012Z_B5C">
+      <div class="video-card" data-id="[ stream_05 // xrzlip6eqau ]">
         <div class="card-id">[ stream_05 // xrzlip6eqau ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/XrZLIp6eqAU/hqdefault.jpg" alt="stream_05" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="XrZLIp6eqAU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/XrZLIp6eqAU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/XrZLIp6eqAU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="nzYllLc4ai4" data-embed="https://www.youtube.com/embed/nzYllLc4ai4?si=HJOJ-Ihb8z1Z4UZC">
+      <div class="video-card" data-id="[ stream_06 // nzylllc4ai4 ]">
         <div class="card-id">[ stream_06 // nzylllc4ai4 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/nzYllLc4ai4/hqdefault.jpg" alt="stream_06" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="nzYllLc4ai4" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/nzYllLc4ai4/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/nzYllLc4ai4/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="edcte26opMA" data-embed="https://www.youtube.com/embed/edcte26opMA?si=iw2HrflszZ1TZD4u">
+      <div class="video-card" data-id="[ stream_07 // edcte26opma ]">
         <div class="card-id">[ stream_07 // edcte26opma ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/edcte26opMA/hqdefault.jpg" alt="stream_07" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="edcte26opMA" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/edcte26opMA/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/edcte26opMA/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="PvcfclSrgTs" data-embed="https://www.youtube.com/embed/PvcfclSrgTs?si=EpO8xNvWPJ7qnaec">
+      <div class="video-card" data-id="[ stream_08 // pvcfclsrgts ]">
         <div class="card-id">[ stream_08 // pvcfclsrgts ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/PvcfclSrgTs/hqdefault.jpg" alt="stream_08" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="PvcfclSrgTs" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/PvcfclSrgTs/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/PvcfclSrgTs/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="SPSen9OOZQU" data-embed="https://www.youtube.com/embed/SPSen9OOZQU?si=bUu17zNYMTkP93R7">
+      <div class="video-card" data-id="[ stream_09 // spsen9oozqu ]">
         <div class="card-id">[ stream_09 // spsen9oozqu ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/SPSen9OOZQU/hqdefault.jpg" alt="stream_09" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="SPSen9OOZQU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/SPSen9OOZQU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/SPSen9OOZQU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="a_Ipaud8SnI" data-embed="https://www.youtube.com/embed/a_Ipaud8SnI?si=hZf1WkB3Q3aEZLRO">
+      <div class="video-card" data-id="[ stream_10 // a_ipaud8sni ]">
         <div class="card-id">[ stream_10 // a_ipaud8sni ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/a_Ipaud8SnI/hqdefault.jpg" alt="stream_10" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="a_Ipaud8SnI" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/a_Ipaud8SnI/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/a_Ipaud8SnI/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="rVNrUJbQwv4" data-embed="https://www.youtube.com/embed/rVNrUJbQwv4?si=Zs5_EddRSE009jD_">
+      <div class="video-card" data-id="[ stream_11 // rvnrujbqwv4 ]">
         <div class="card-id">[ stream_11 // rvnrujbqwv4 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/rVNrUJbQwv4/hqdefault.jpg" alt="stream_11" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="rVNrUJbQwv4" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/rVNrUJbQwv4/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/rVNrUJbQwv4/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="shSAVrGry64" data-embed="https://www.youtube.com/embed/shSAVrGry64?si=lEEBIr6Oj7uVj3o3">
+      <div class="video-card" data-id="[ stream_12 // shsavrgry64 ]">
         <div class="card-id">[ stream_12 // shsavrgry64 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/shSAVrGry64/hqdefault.jpg" alt="stream_12" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="shSAVrGry64" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/shSAVrGry64/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/shSAVrGry64/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="fYpT1XGy250" data-embed="https://www.youtube.com/embed/fYpT1XGy250?si=9y-Em1WrIvt_HxHf">
+      <div class="video-card" data-id="[ stream_13 // fypt1xgy250 ]">
         <div class="card-id">[ stream_13 // fypt1xgy250 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/fYpT1XGy250/hqdefault.jpg" alt="stream_13" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="fYpT1XGy250" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/fYpT1XGy250/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/fYpT1XGy250/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="gaUGacM9NAs" data-embed="https://www.youtube.com/embed/gaUGacM9NAs?si=3u9SzeD0KmY4KBWC">
+      <div class="video-card" data-id="[ stream_14 // gaugacm9nas ]">
         <div class="card-id">[ stream_14 // gaugacm9nas ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/gaUGacM9NAs/hqdefault.jpg" alt="stream_14" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="gaUGacM9NAs" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/gaUGacM9NAs/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/gaUGacM9NAs/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="8GNsiP2kxw0" data-embed="https://www.youtube.com/embed/8GNsiP2kxw0?si=zFtC4C5aqwSrK2uD">
+      <div class="video-card" data-id="[ stream_15 // 8gnsip2kxw0 ]">
         <div class="card-id">[ stream_15 // 8gnsip2kxw0 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/8GNsiP2kxw0/hqdefault.jpg" alt="stream_15" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="8GNsiP2kxw0" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/8GNsiP2kxw0/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/8GNsiP2kxw0/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="XuowcJaKq9Y" data-embed="https://www.youtube.com/embed/XuowcJaKq9Y?si=Fukmvtt_SL8HtPdF">
+      <div class="video-card" data-id="[ stream_16 // xuowcjakqy ]">
         <div class="card-id">[ stream_16 // xuowcjakqy ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/XuowcJaKq9Y/hqdefault.jpg" alt="stream_16" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="XuowcJaKq9Y" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/XuowcJaKq9Y/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/XuowcJaKq9Y/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="dtU9D3gVvxw" data-embed="https://www.youtube.com/embed/dtU9D3gVvxw?si=_McB1Bvy5FDFPGQH">
+      <div class="video-card" data-id="[ stream_17 // dtu9d3gvvxw ]">
         <div class="card-id">[ stream_17 // dtu9d3gvvxw ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/dtU9D3gVvxw/hqdefault.jpg" alt="stream_17" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="dtU9D3gVvxw" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/dtU9D3gVvxw/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/dtU9D3gVvxw/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="n8v6O7PxsLE" data-embed="https://www.youtube.com/embed/n8v6O7PxsLE?si=HFwwOS2d6thRCRSv">
+      <div class="video-card" data-id="[ stream_18 // n8v6o7pxsle ]">
         <div class="card-id">[ stream_18 // n8v6o7pxsle ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/n8v6O7PxsLE/hqdefault.jpg" alt="stream_18" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="n8v6O7PxsLE" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/n8v6O7PxsLE/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/n8v6O7PxsLE/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="OFKw16dqa9c" data-embed="https://www.youtube.com/embed/OFKw16dqa9c?si=jIDZrBCJRTAcHsif">
+      <div class="video-card" data-id="[ stream_19 // ofkw16dqa9c ]">
         <div class="card-id">[ stream_19 // ofkw16dqa9c ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/OFKw16dqa9c/hqdefault.jpg" alt="stream_19" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="OFKw16dqa9c" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/OFKw16dqa9c/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/OFKw16dqa9c/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="rWF0EMxKtdU" data-embed="https://www.youtube.com/embed/rWF0EMxKtdU?si=Si7bnUKk4kPFnegj">
+      <div class="video-card" data-id="[ stream_20 // rwf0emxktdu ]">
         <div class="card-id">[ stream_20 // rwf0emxktdu ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/rWF0EMxKtdU/hqdefault.jpg" alt="stream_20" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="rWF0EMxKtdU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/rWF0EMxKtdU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/rWF0EMxKtdU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="ueW5aSYOB-A" data-embed="https://www.youtube.com/embed/ueW5aSYOB-A?si=e_ZVzlK5fpEUJ6zh">
+      <div class="video-card" data-id="[ stream_21 // uew5asyob-a ]">
         <div class="card-id">[ stream_21 // uew5asyob-a ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/ueW5aSYOB-A/hqdefault.jpg" alt="stream_21" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="ueW5aSYOB-A" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/ueW5aSYOB-A/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/ueW5aSYOB-A/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="T2RVbMoOlrQ" data-embed="https://www.youtube.com/embed/T2RVbMoOlrQ?si=zsR5AgPuJsissUl_">
+      <div class="video-card" data-id="[ stream_22 // t2rvbmoolrq ]">
         <div class="card-id">[ stream_22 // t2rvbmoolrq ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/T2RVbMoOlrQ/hqdefault.jpg" alt="stream_22" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="T2RVbMoOlrQ" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/T2RVbMoOlrQ/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/T2RVbMoOlrQ/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="GcmK5zVoz4Q" data-embed="https://www.youtube.com/embed/GcmK5zVoz4Q?si=84piXW-LU4Od7TDN">
+      <div class="video-card" data-id="[ stream_23 // gcmk5zvoz4q ]">
         <div class="card-id">[ stream_23 // gcmk5zvoz4q ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/GcmK5zVoz4Q/hqdefault.jpg" alt="stream_23" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="GcmK5zVoz4Q" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/GcmK5zVoz4Q/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/GcmK5zVoz4Q/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="AET8GFGp-GI" data-embed="https://www.youtube.com/embed/AET8GFGp-GI?si=Ra5l4cOEq735HJrE">
+      <div class="video-card" data-id="[ stream_24 // aet8gfgp-gi ]">
         <div class="card-id">[ stream_24 // aet8gfgp-gi ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/AET8GFGp-GI/hqdefault.jpg" alt="stream_24" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="AET8GFGp-GI" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/AET8GFGp-GI/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/AET8GFGp-GI/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="G8BpjMjdzXY" data-embed="https://www.youtube.com/embed/G8BpjMjdzXY?si=wo525-chOiHVH6ic">
+      <div class="video-card" data-id="[ stream_25 // g8bpjmdzxy ]">
         <div class="card-id">[ stream_25 // g8bpjmdzxy ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/G8BpjMjdzXY/hqdefault.jpg" alt="stream_25" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="G8BpjMjdzXY" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/G8BpjMjdzXY/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/G8BpjMjdzXY/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="tpiO-x_CyNE" data-embed="https://www.youtube.com/embed/tpiO-x_CyNE?si=zwVdPGwlLajQOnAu">
+      <div class="video-card" data-id="[ stream_26 // tpio-x_cyne ]">
         <div class="card-id">[ stream_26 // tpio-x_cyne ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/tpiO-x_CyNE/hqdefault.jpg" alt="stream_26" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="tpiO-x_CyNE" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/tpiO-x_CyNE/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/tpiO-x_CyNE/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="s2G5jLayP7c" data-embed="https://www.youtube.com/embed/s2G5jLayP7c?si=IuAJeoN9xwQCm55W">
+      <div class="video-card" data-id="[ stream_27 // s2g5jlayp7c ]">
         <div class="card-id">[ stream_27 // s2g5jlayp7c ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/s2G5jLayP7c/hqdefault.jpg" alt="stream_27" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="s2G5jLayP7c" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/s2G5jLayP7c/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/s2G5jLayP7c/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="GOEPdjI_YAI" data-embed="https://www.youtube.com/embed/GOEPdjI_YAI?si=DBBOaF_-BxU_gA95">
+      <div class="video-card" data-id="[ stream_28 // goepdji_yai ]">
         <div class="card-id">[ stream_28 // goepdji_yai ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/GOEPdjI_YAI/hqdefault.jpg" alt="stream_28" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="GOEPdjI_YAI" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/GOEPdjI_YAI/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/GOEPdjI_YAI/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="Gio_UglfhDc" data-embed="https://www.youtube.com/embed/Gio_UglfhDc?si=rI5AkptoMz8IO09l">
+      <div class="video-card" data-id="[ stream_29 // gio_uglfhdc ]">
         <div class="card-id">[ stream_29 // gio_uglfhdc ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/Gio_UglfhDc/hqdefault.jpg" alt="stream_29" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="Gio_UglfhDc" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/Gio_UglfhDc/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Gio_UglfhDc/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="CmrzyWz6yKo" data-embed="https://www.youtube.com/embed/CmrzyWz6yKo?si=rvtIo8PW4Wfly9JF">
+      <div class="video-card" data-id="[ stream_30 // cmrzywz6yko ]">
         <div class="card-id">[ stream_30 // cmrzywz6yko ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/CmrzyWz6yKo/hqdefault.jpg" alt="stream_30" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="CmrzyWz6yKo" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/CmrzyWz6yKo/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/CmrzyWz6yKo/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="PZqS7AW7xEg" data-embed="https://www.youtube.com/embed/PZqS7AW7xEg?si=rJFJSJBjTpnEzRub">
+      <div class="video-card" data-id="[ stream_31 // pzqs7aw7xeg ]">
         <div class="card-id">[ stream_31 // pzqs7aw7xeg ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/PZqS7AW7xEg/hqdefault.jpg" alt="stream_31" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="PZqS7AW7xEg" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/PZqS7AW7xEg/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/PZqS7AW7xEg/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="sYUKKlpcuTI" data-embed="https://www.youtube.com/embed/sYUKKlpcuTI?si=2y5PnBmd2zl0SHk6">
+      <div class="video-card" data-id="[ stream_32 // syukklpcuti ]">
         <div class="card-id">[ stream_32 // syukklpcuti ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/sYUKKlpcuTI/hqdefault.jpg" alt="stream_32" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="sYUKKlpcuTI" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/sYUKKlpcuTI/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sYUKKlpcuTI/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="DVXpTLjmI0c" data-embed="https://www.youtube.com/embed/DVXpTLjmI0c?si=pZIa5Da4lkwkXQYv">
+      <div class="video-card" data-id="[ stream_33 // dvxptljmi0c ]">
         <div class="card-id">[ stream_33 // dvxptljmi0c ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/DVXpTLjmI0c/hqdefault.jpg" alt="stream_33" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="DVXpTLjmI0c" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/DVXpTLjmI0c/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/DVXpTLjmI0c/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="U5bwRY-HcNQ" data-embed="https://www.youtube.com/embed/U5bwRY-HcNQ?si=bZL58zNjjIDz5PjU">
+      <div class="video-card" data-id="[ stream_34 // u5bwry-hcnq ]">
         <div class="card-id">[ stream_34 // u5bwry-hcnq ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/U5bwRY-HcNQ/hqdefault.jpg" alt="stream_34" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="U5bwRY-HcNQ" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/U5bwRY-HcNQ/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/U5bwRY-HcNQ/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="l_6by6-8zxg" data-embed="https://www.youtube.com/embed/l_6by6-8zxg?si=YfnEEJvJj3V1H116">
+      <div class="video-card" data-id="[ stream_35 // l_6by6-8zxg ]">
         <div class="card-id">[ stream_35 // l_6by6-8zxg ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/l_6by6-8zxg/hqdefault.jpg" alt="stream_35" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="l_6by6-8zxg" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/l_6by6-8zxg/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/l_6by6-8zxg/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="OFKw16dqa9c" data-embed="https://www.youtube.com/embed/OFKw16dqa9c?si=s7vREhIoqkbVtbhD">
+      <div class="video-card" data-id="[ stream_36 // ofkw16dqa9c_2 ]">
         <div class="card-id">[ stream_36 // ofkw16dqa9c_2 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/OFKw16dqa9c/hqdefault.jpg" alt="stream_36" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="OFKw16dqa9c" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/OFKw16dqa9c/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/OFKw16dqa9c/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="jGse8_jPaoQ" data-embed="https://www.youtube.com/embed/jGse8_jPaoQ?si=45xY1J4dcV2xTt93">
+      <div class="video-card" data-id="[ stream_37 // jgse8_jpaoq ]">
         <div class="card-id">[ stream_37 // jgse8_jpaoq ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/jGse8_jPaoQ/hqdefault.jpg" alt="stream_37" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="jGse8_jPaoQ" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/jGse8_jPaoQ/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/jGse8_jPaoQ/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="wQDRr-9J7zY" data-embed="https://www.youtube.com/embed/wQDRr-9J7zY?si=TePliAeYDUv-4ygf">
+      <div class="video-card" data-id="[ stream_38 // wqdrr-9j7zy ]">
         <div class="card-id">[ stream_38 // wqdrr-9j7zy ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/wQDRr-9J7zY/hqdefault.jpg" alt="stream_38" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="wQDRr-9J7zY" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/wQDRr-9J7zY/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/wQDRr-9J7zY/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="sMpmFbVHlvs" data-embed="https://www.youtube.com/embed/sMpmFbVHlvs?si=6_hOt2qdFUORG5WK">
+      <div class="video-card" data-id="[ stream_39 // smpmfbvhlvs ]">
         <div class="card-id">[ stream_39 // smpmfbvhlvs ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/sMpmFbVHlvs/hqdefault.jpg" alt="stream_39" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="sMpmFbVHlvs" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/sMpmFbVHlvs/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sMpmFbVHlvs/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="rfrRsMclQhY" data-embed="https://www.youtube.com/embed/rfrRsMclQhY?si=-RKpORx24PEZEUuB">
+      <div class="video-card" data-id="[ stream_40 // rfrrsmclqhy ]">
         <div class="card-id">[ stream_40 // rfrrsmclqhy ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/rfrRsMclQhY/hqdefault.jpg" alt="stream_40" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="rfrRsMclQhY" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/rfrRsMclQhY/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/rfrRsMclQhY/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="x2MsA2s0yzA" data-embed="https://www.youtube.com/embed/x2MsA2s0yzA?si=1gHLmmJTD0dEBjW_">
+      <div class="video-card" data-id="[ stream_41 // x2msa2s0yza ]">
         <div class="card-id">[ stream_41 // x2msa2s0yza ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/x2MsA2s0yzA/hqdefault.jpg" alt="stream_41" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="x2MsA2s0yzA" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/x2MsA2s0yzA/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/x2MsA2s0yzA/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="ftHyMiC3dQE" data-embed="https://www.youtube.com/embed/ftHyMiC3dQE?si=ScEPb27sBMP8S8p3">
+      <div class="video-card" data-id="[ stream_42 // fthymic3dqe ]">
         <div class="card-id">[ stream_42 // fthymic3dqe ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/ftHyMiC3dQE/hqdefault.jpg" alt="stream_42" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="ftHyMiC3dQE" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/ftHyMiC3dQE/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/ftHyMiC3dQE/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="dEIYjvi5ltU" data-embed="https://www.youtube.com/embed/dEIYjvi5ltU?si=WoI1Hnuu5uPAVH-g">
+      <div class="video-card" data-id="[ stream_43 // deiyjvi5ltu ]">
         <div class="card-id">[ stream_43 // deiyjvi5ltu ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/dEIYjvi5ltU/hqdefault.jpg" alt="stream_43" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="dEIYjvi5ltU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/dEIYjvi5ltU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/dEIYjvi5ltU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="NPTHvAtP2iU" data-embed="https://www.youtube.com/embed/NPTHvAtP2iU?si=djhxgdNZkrReJLU6">
+      <div class="video-card" data-id="[ stream_44 // npthvatp2iu ]">
         <div class="card-id">[ stream_44 // npthvatp2iu ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/NPTHvAtP2iU/hqdefault.jpg" alt="stream_44" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="NPTHvAtP2iU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/NPTHvAtP2iU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/NPTHvAtP2iU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="Awb38bEqjAQ" data-embed="https://www.youtube.com/embed/Awb38bEqjAQ?si=OrquBjfdxv8oPeok">
+      <div class="video-card" data-id="[ stream_45 // awb38beqjaq ]">
         <div class="card-id">[ stream_45 // awb38beqjaq ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/Awb38bEqjAQ/hqdefault.jpg" alt="stream_45" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="Awb38bEqjAQ" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/Awb38bEqjAQ/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Awb38bEqjAQ/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="OZl-lspuFm4" data-embed="https://www.youtube.com/embed/OZl-lspuFm4?si=cjD1WWImT_Uu3MCc">
+      <div class="video-card" data-id="[ stream_46 // ozl-lspufm4 ]">
         <div class="card-id">[ stream_46 // ozl-lspufm4 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/OZl-lspuFm4/hqdefault.jpg" alt="stream_46" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="OZl-lspuFm4" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/OZl-lspuFm4/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/OZl-lspuFm4/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="AYPdJixNl-o" data-embed="https://www.youtube.com/embed/AYPdJixNl-o?si=Gvu-E-IbdReBkSsZ">
+      <div class="video-card" data-id="[ stream_47 // aypdjixnl-o ]">
         <div class="card-id">[ stream_47 // aypdjixnl-o ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/AYPdJixNl-o/hqdefault.jpg" alt="stream_47" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="AYPdJixNl-o" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/AYPdJixNl-o/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/AYPdJixNl-o/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="YLcndKedLbs" data-embed="https://www.youtube.com/embed/YLcndKedLbs?si=fNExNN6jdxn5hc8p">
+      <div class="video-card" data-id="[ stream_48 // ylcndkedlbs ]">
         <div class="card-id">[ stream_48 // ylcndkedlbs ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/YLcndKedLbs/hqdefault.jpg" alt="stream_48" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="YLcndKedLbs" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/YLcndKedLbs/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/YLcndKedLbs/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="52Rd8Ue0wUs" data-embed="https://www.youtube.com/embed/52Rd8Ue0wUs?si=Bq78TiYUsGl5vtAM">
+      <div class="video-card" data-id="[ stream_49 // 52rd8ue0wus ]">
         <div class="card-id">[ stream_49 // 52rd8ue0wus ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/52Rd8Ue0wUs/hqdefault.jpg" alt="stream_49" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="52Rd8Ue0wUs" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/52Rd8Ue0wUs/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/52Rd8Ue0wUs/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="_CQGSxCRRe4" data-embed="https://www.youtube.com/embed/_CQGSxCRRe4?si=JWPFuiWnZ2HFa5wo">
+      <div class="video-card" data-id="[ stream_50 // _cqgsxcrre4 ]">
         <div class="card-id">[ stream_50 // _cqgsxcrre4 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/_CQGSxCRRe4/hqdefault.jpg" alt="stream_50" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="_CQGSxCRRe4" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/_CQGSxCRRe4/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/_CQGSxCRRe4/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="5VHG-72_VDg" data-embed="https://www.youtube.com/embed/5VHG-72_VDg?si=loHu-xy_MXUKH15A">
+      <div class="video-card" data-id="[ stream_51 // 5vhg-72_vdg ]">
         <div class="card-id">[ stream_51 // 5vhg-72_vdg ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/5VHG-72_VDg/hqdefault.jpg" alt="stream_51" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="5VHG-72_VDg" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/5VHG-72_VDg/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/5VHG-72_VDg/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="rGlXOWJEOBU" data-embed="https://www.youtube.com/embed/rGlXOWJEOBU?si=czKEpVLQqvNncKH9">
+      <div class="video-card" data-id="[ stream_52 // rglxowjeobu ]">
         <div class="card-id">[ stream_52 // rglxowjeobu ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/rGlXOWJEOBU/hqdefault.jpg" alt="stream_52" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="rGlXOWJEOBU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/rGlXOWJEOBU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/rGlXOWJEOBU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="lqggAPQGeN8" data-embed="https://www.youtube.com/embed/lqggAPQGeN8?si=f6-PcVup71O02pnA">
+      <div class="video-card" data-id="[ stream_53 // lqggapqgen8 ]">
         <div class="card-id">[ stream_53 // lqggapqgen8 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/lqggAPQGeN8/hqdefault.jpg" alt="stream_53" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="lqggAPQGeN8" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/lqggAPQGeN8/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/lqggAPQGeN8/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="Eqs20nVFjkA" data-embed="https://www.youtube.com/embed/Eqs20nVFjkA?si=e4JXq_OdNq88ZFdQ">
+      <div class="video-card" data-id="[ stream_54 // eqs20nvfjka ]">
         <div class="card-id">[ stream_54 // eqs20nvfjka ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/Eqs20nVFjkA/hqdefault.jpg" alt="stream_54" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="Eqs20nVFjkA" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/Eqs20nVFjkA/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Eqs20nVFjkA/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="C5onCLew8G4" data-embed="https://www.youtube.com/embed/C5onCLew8G4?si=MvNpOwpcW5OKiGxL">
+      <div class="video-card" data-id="[ stream_55 // c5onclew8g4 ]">
         <div class="card-id">[ stream_55 // c5onclew8g4 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/C5onCLew8G4/hqdefault.jpg" alt="stream_55" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="C5onCLew8G4" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/C5onCLew8G4/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/C5onCLew8G4/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="jP5xa1AXcsc" data-embed="https://www.youtube.com/embed/jP5xa1AXcsc?si=PMa-K2_jrM_QlcKx">
+      <div class="video-card" data-id="[ stream_56 // jp5xa1axcsc ]">
         <div class="card-id">[ stream_56 // jp5xa1axcsc ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/jP5xa1AXcsc/hqdefault.jpg" alt="stream_56" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="jP5xa1AXcsc" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/jP5xa1AXcsc/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/jP5xa1AXcsc/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="Drxo6ad6I4s" data-embed="https://www.youtube.com/embed/Drxo6ad6I4s?si=RMJNh8VPjnPxmWbp">
+      <div class="video-card" data-id="[ stream_57 // drxo6ad6i4s ]">
         <div class="card-id">[ stream_57 // drxo6ad6i4s ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/Drxo6ad6I4s/hqdefault.jpg" alt="stream_57" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="Drxo6ad6I4s" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/Drxo6ad6I4s/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Drxo6ad6I4s/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="nkkLzSemfTA" data-embed="https://www.youtube.com/embed/nkkLzSemfTA?si=VulwI0uFwHWbJgyV">
+      <div class="video-card" data-id="[ stream_58 // nkklzsemfta ]">
         <div class="card-id">[ stream_58 // nkklzsemfta ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/nkkLzSemfTA/hqdefault.jpg" alt="stream_58" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="nkkLzSemfTA" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/nkkLzSemfTA/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/nkkLzSemfTA/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="YFL7dTFp3Jg" data-embed="https://www.youtube.com/embed/YFL7dTFp3Jg?si=b-NQr08KDb9Xe7Nm">
+      <div class="video-card" data-id="[ stream_59 // yfl7dtfp3jg ]">
         <div class="card-id">[ stream_59 // yfl7dtfp3jg ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/YFL7dTFp3Jg/hqdefault.jpg" alt="stream_59" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="YFL7dTFp3Jg" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/YFL7dTFp3Jg/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/YFL7dTFp3Jg/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="eu1jJ9-VvLs" data-embed="https://www.youtube.com/embed/eu1jJ9-VvLs?si=d9DelEPiY3ya2yFP">
+      <div class="video-card" data-id="[ stream_60 // eu1jj9-vvls ]">
         <div class="card-id">[ stream_60 // eu1jj9-vvls ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/eu1jJ9-VvLs/hqdefault.jpg" alt="stream_60" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="eu1jJ9-VvLs" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/eu1jJ9-VvLs/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/eu1jJ9-VvLs/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="x7TMfrHgHLU" data-embed="https://www.youtube.com/embed/x7TMfrHgHLU?si=SvgdwZnfMHLmbTMx">
+      <div class="video-card" data-id="[ stream_61 // x7tmfrhghlu ]">
         <div class="card-id">[ stream_61 // x7tmfrhghlu ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/x7TMfrHgHLU/hqdefault.jpg" alt="stream_61" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="x7TMfrHgHLU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/x7TMfrHgHLU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/x7TMfrHgHLU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="MW6MexRrB7I" data-embed="https://www.youtube.com/embed/MW6MexRrB7I?si=clzi4u7OVjXSqnJB">
+      <div class="video-card" data-id="[ stream_62 // mw6mexrrb7i ]">
         <div class="card-id">[ stream_62 // mw6mexrrb7i ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/MW6MexRrB7I/hqdefault.jpg" alt="stream_62" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="MW6MexRrB7I" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/MW6MexRrB7I/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/MW6MexRrB7I/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="LStBkmZKO-o" data-embed="https://www.youtube.com/embed/LStBkmZKO-o?si=yO58Td_9aiNk5oYS">
+      <div class="video-card" data-id="[ stream_63 // lstbkmzko-o ]">
         <div class="card-id">[ stream_63 // lstbkmzko-o ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/LStBkmZKO-o/hqdefault.jpg" alt="stream_63" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="LStBkmZKO-o" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/LStBkmZKO-o/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/LStBkmZKO-o/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="UbuF3veaYCA" data-embed="https://www.youtube.com/embed/UbuF3veaYCA?si=bxEFmzBN-7OtROZ6">
+      <div class="video-card" data-id="[ stream_64 // ubuf3veayca ]">
         <div class="card-id">[ stream_64 // ubuf3veayca ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/UbuF3veaYCA/hqdefault.jpg" alt="stream_64" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="UbuF3veaYCA" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/UbuF3veaYCA/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/UbuF3veaYCA/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="Fbu7dUOCRw4" data-embed="https://www.youtube.com/embed/Fbu7dUOCRw4?si=KE6rVsibW7hcp42l">
+      <div class="video-card" data-id="[ stream_65 // fbu7duocrw4 ]">
         <div class="card-id">[ stream_65 // fbu7duocrw4 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/Fbu7dUOCRw4/hqdefault.jpg" alt="stream_65" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="Fbu7dUOCRw4" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/Fbu7dUOCRw4/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Fbu7dUOCRw4/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="rUqjXN2eB2E" data-embed="https://www.youtube.com/embed/rUqjXN2eB2E?si=SZs-UEsvAxv2Qz3a">
+      <div class="video-card" data-id="[ stream_66 // ruqjxn2eb2e ]">
         <div class="card-id">[ stream_66 // ruqjxn2eb2e ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/rUqjXN2eB2E/hqdefault.jpg" alt="stream_66" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="rUqjXN2eB2E" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/rUqjXN2eB2E/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/rUqjXN2eB2E/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="ObvfZNwAvsw" data-embed="https://www.youtube.com/embed/ObvfZNwAvsw?si=1WCIAW78DYJuQ7N_">
+      <div class="video-card" data-id="[ stream_67 // obvfznwavsw ]">
         <div class="card-id">[ stream_67 // obvfznwavsw ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/ObvfZNwAvsw/hqdefault.jpg" alt="stream_67" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="ObvfZNwAvsw" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/ObvfZNwAvsw/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/ObvfZNwAvsw/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="h5FYDJlo1nU" data-embed="https://www.youtube.com/embed/h5FYDJlo1nU?si=9Bl1r0smh3qIiJ3T">
+      <div class="video-card" data-id="[ stream_68 // h5fydjlo1nu ]">
         <div class="card-id">[ stream_68 // h5fydjlo1nu ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/h5FYDJlo1nU/hqdefault.jpg" alt="stream_68" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="h5FYDJlo1nU" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/h5FYDJlo1nU/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/h5FYDJlo1nU/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="PY-5q20t9gQ" data-embed="https://www.youtube.com/embed/PY-5q20t9gQ?si=74rjlgUyWxWZtFge">
+      <div class="video-card" data-id="[ stream_69 // py-5q20t9gq ]">
         <div class="card-id">[ stream_69 // py-5q20t9gq ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/PY-5q20t9gQ/hqdefault.jpg" alt="stream_69" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="PY-5q20t9gQ" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/PY-5q20t9gQ/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/PY-5q20t9gQ/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="UgLbEs8mMwQ" data-embed="https://www.youtube.com/embed/UgLbEs8mMwQ?si=BYY_DApudNks1BCR">
+      <div class="video-card" data-id="[ stream_70 // uglbes8mmwq ]">
         <div class="card-id">[ stream_70 // uglbes8mmwq ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/UgLbEs8mMwQ/hqdefault.jpg" alt="stream_70" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="UgLbEs8mMwQ" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/UgLbEs8mMwQ/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/UgLbEs8mMwQ/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="Smpo8Hb8rkg" data-embed="https://www.youtube.com/embed/Smpo8Hb8rkg?si=oCHdwfI1A8b71hbl">
+      <div class="video-card" data-id="[ stream_71 // smpo8hb8rkg ]">
         <div class="card-id">[ stream_71 // smpo8hb8rkg ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/Smpo8Hb8rkg/hqdefault.jpg" alt="stream_71" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="Smpo8Hb8rkg" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/Smpo8Hb8rkg/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Smpo8Hb8rkg/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="nSe3XK5s5LM" data-embed="https://www.youtube.com/embed/nSe3XK5s5LM?si=q3xdoD-vBBYcWBTa">
+      <div class="video-card" data-id="[ stream_72 // nse3xk5s5lm ]">
         <div class="card-id">[ stream_72 // nse3xk5s5lm ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/nSe3XK5s5LM/hqdefault.jpg" alt="stream_72" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="nSe3XK5s5LM" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/nSe3XK5s5LM/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/nSe3XK5s5LM/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="EQ3u3Yrptis" data-embed="https://www.youtube.com/embed/EQ3u3Yrptis?si=B4Sv_NHZV3LebmhB">
+      <div class="video-card" data-id="[ stream_73 // eq3u3yrptis ]">
         <div class="card-id">[ stream_73 // eq3u3yrptis ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/EQ3u3Yrptis/hqdefault.jpg" alt="stream_73" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="EQ3u3Yrptis" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/EQ3u3Yrptis/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/EQ3u3Yrptis/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="sxLPbEqkD98" data-embed="https://www.youtube.com/embed/sxLPbEqkD98?si=uQtzBZMH7r7tsPgX">
+      <div class="video-card" data-id="[ stream_74 // sxlpbeqkd98 ]">
         <div class="card-id">[ stream_74 // sxlpbeqkd98 ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/sxLPbEqkD98/hqdefault.jpg" alt="stream_74" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="sxLPbEqkD98" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/sxLPbEqkD98/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sxLPbEqkD98/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="QPUNKY-LeDc" data-embed="https://www.youtube.com/embed/QPUNKY-LeDc?si=iSTHJnFvUu5E9KHP">
+      <div class="video-card" data-id="[ stream_75 // qpunkyl-edc ]">
         <div class="card-id">[ stream_75 // qpunkyl-edc ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/QPUNKY-LeDc/hqdefault.jpg" alt="stream_75" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="QPUNKY-LeDc" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/QPUNKY-LeDc/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/QPUNKY-LeDc/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="jBZuds_wVLk" data-embed="https://www.youtube.com/embed/jBZuds_wVLk?si=k2IJ8l5qvOymShQ9">
+      <div class="video-card" data-id="[ stream_76 // jbzuds_wvlk ]">
         <div class="card-id">[ stream_76 // jbzuds_wvlk ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/jBZuds_wVLk/hqdefault.jpg" alt="stream_76" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="jBZuds_wVLk" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/jBZuds_wVLk/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/jBZuds_wVLk/hqdefault.jpg';"></div>
       </div>
 
-      <div class="video-card" data-yt-id="NtE4SsFQi5I" data-embed="https://www.youtube.com/embed/NtE4SsFQi5I?si=gK1SgG7YEkXJaBHO">
+      <div class="video-card" data-id="[ stream_77 // nte4ssfqi5i ]">
         <div class="card-id">[ stream_77 // nte4ssfqi5i ]<span class="scanner-bar"></span></div>
-        <div class="yt-placeholder">
-          <img src="https://img.youtube.com/vi/NtE4SsFQi5I/hqdefault.jpg" alt="stream_77" loading="lazy">
-        </div>
+        <div class="video-thumb" data-video-id="NtE4SsFQi5I" role="button" tabindex="0" aria-label="play video"><img src="https://i.ytimg.com/vi/NtE4SsFQi5I/maxresdefault.jpg" alt="video thumbnail" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/NtE4SsFQi5I/hqdefault.jpg';"></div>
       </div>
 
     </main>
@@ -757,8 +631,10 @@
     function randomizeScanners() {
       const scanners = document.querySelectorAll('.scanner-bar');
       scanners.forEach(bar => {
+        // Durées légèrement variables (entre 3.2s et 5.2s) pour la désynchronisation naturelle
         const duration = (Math.random() * 2 + 3.2).toFixed(2);
         const delay = (Math.random() * 4).toFixed(2);
+        
         bar.style.animationDuration = `${duration}s`;
         bar.style.animationDelay = `${delay}s`;
       });
@@ -845,34 +721,6 @@
       osc.stop(audioCtx.currentTime + 0.5);
     }
 
-    /* GESTION DE LA LECTURE DES VIDÉOS AU CLIC */
-    function setupVideoClickHandlers() {
-      document.querySelectorAll('.video-card').forEach(card => {
-        const placeholder = card.querySelector('.yt-placeholder');
-        const embedBaseUrl = card.dataset.embed;
-
-        if (placeholder && embedBaseUrl) {
-          placeholder.addEventListener('click', () => {
-            playMotherBeep();
-            
-            // Construction de l'URL avec autoplay
-            const separator = embedBaseUrl.includes('?') ? '&' : '?';
-            const autoplayUrl = `${embedBaseUrl}${separator}autoplay=1`;
-
-            // Création dynamique de l'iframe
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('src', autoplayUrl);
-            iframe.setAttribute('title', 'YouTube video player');
-            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-            iframe.setAttribute('allowfullscreen', '');
-            
-            // Remplacement direct de la vignette
-            placeholder.replaceWith(iframe);
-          });
-        }
-      });
-    }
-
     const titleText = "director // kevin.elamrani-lince";
     const emailLabelText = "e-mail: ";
     const emailValueText = "contact@kevin-elamrani-lince.com";
@@ -889,6 +737,35 @@
 
     const cards = document.querySelectorAll('.video-card');
     const typeSpeed = 35;
+
+    /* L'INTERFACE YOUTUBE N'EST CHARGÉE QU'AU CLIC */
+    function activateVideo(thumb) {
+      if (thumb.classList.contains('is-playing')) return;
+
+      const videoId = thumb.dataset.videoId;
+      const iframe = document.createElement('iframe');
+
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.title = 'YouTube video player';
+      iframe.allowFullscreen = true;
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      iframe.loading = 'lazy';
+
+      thumb.classList.add('is-playing');
+      thumb.replaceChildren(iframe);
+    }
+
+    function initVideoThumbnails() {
+      document.querySelectorAll('.video-thumb').forEach(thumb => {
+        thumb.addEventListener('click', () => activateVideo(thumb));
+        thumb.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            activateVideo(thumb);
+          }
+        });
+      });
+    }
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -908,7 +785,6 @@
     async function runDeploySequence() {
       initAudio();
       randomizeScanners();
-      setupVideoClickHandlers();
 
       cursorTitle.style.display = 'inline-block';
       await typeEffect(typeTitleEl, titleText);
@@ -933,7 +809,10 @@
       }
     }
 
-    window.addEventListener('DOMContentLoaded', runDeploySequence);
+    window.addEventListener('DOMContentLoaded', () => {
+      initVideoThumbnails();
+      runDeploySequence();
+    });
   </script>
 </body>
 </html>
